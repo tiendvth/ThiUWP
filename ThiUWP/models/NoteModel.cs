@@ -72,7 +72,7 @@ namespace ThiUWP.models
         }
 
 
-        public async Task<List<Note>> SearchByKeyword(string keyword)
+        public List<Note> SearchByKeyword(string keyword)
         {
             List<Note> contacts = new List<Note>();
             try
@@ -97,13 +97,8 @@ namespace ThiUWP.models
                         };
                         contacts.Add(contact);
                     }
-                    if (reader == null)
-                    {
-                        ContentDialog contentDialog = new ContentDialog();
-                        contentDialog.Title = "Khong tim thay";
-                        contentDialog.PrimaryButtonText = "Khong tim thay";
-                        await contentDialog.ShowAsync();
-                    }
+                   
+                    
                 }
             }
             catch (Exception e)

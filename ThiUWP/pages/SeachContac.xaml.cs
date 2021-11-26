@@ -32,11 +32,14 @@ namespace ThiUWP.pages
 
         private void SeachContac_Loaded(object sender, RoutedEventArgs e)
         {
-            MyListView.ItemsSource = noteModel.FindAll();
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+           var result =noteModel.SearchByKeyword(txtName.Text);
+            MyListView.ItemsSource = result;
+
 
         }
     }

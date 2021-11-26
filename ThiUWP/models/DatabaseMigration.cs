@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ThiUWP.entities;
 using Windows.Storage;
 
 namespace ThiUWP.models
@@ -29,6 +30,8 @@ namespace ThiUWP.models
                 command.ExecuteNonQuery();
                 
             }
-        }       
+            
+        }  
+       
     }
 }
