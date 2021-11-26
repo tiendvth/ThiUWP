@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace ThiUWP.models
             {
                 db.Open();
                 SqliteCommand command = new SqliteCommand(_createNoteTable,db );
-
+                Debug.WriteLine("ok");
                 command.ExecuteNonQuery();
             }
         }

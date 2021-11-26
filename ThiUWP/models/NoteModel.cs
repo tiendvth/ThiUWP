@@ -19,11 +19,11 @@ namespace ThiUWP.models
         {
             try
             {
-                using (SqliteConnection cnn = new SqliteConnection($"Filename={DatabaseMigration._databasePath}"))
+                using (SqliteConnection db = new SqliteConnection($"Filename={DatabaseMigration._databasePath}"))
                 {
-                    cnn.Open();
+                    db.Open();
                     SqliteCommand command = new SqliteCommand("INSERT INTO notes(Id, Name, PhoneNumber)" +
-                " values (@id, @title, @detail, @created_at)", cnn);
+                " values ( @name, @phonnumber)", db);
                     command.Parameters.AddWithValue("@Name", note.Name);
                     command.Parameters.AddWithValue("@PhoneNumber", note.PhoneNumber);                    
                     command.ExecuteNonQuery();
