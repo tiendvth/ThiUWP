@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="ThiUWP.pages.SeachContac"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ThiUWP.pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel>
+        <StackPanel>
+            <TextBlock Text="Seach Contac" Margin="20 10 0 0" FontSize="20" />
+        </StackPanel>
+        <TextBox Header ="Name"  x:Name="txtname" Width="300" Margin="20 20 0 0" PlaceholderText="please enter title"   HorizontalAlignment="Left"/>
+        <TextBox Header ="Phone" x:Name="txtphonnumber" Width="300" Margin="20 20 0 0" PlaceholderText="please enter details"   HorizontalAlignment="Left" AcceptsReturn="True"/>
+
+        <StackPanel Orientation="Horizontal">
+            <Button  Content="Seach" Click="Button_Click" Margin="20 30 0 0" Width="300"/>
+
+        </StackPanel>
+    </StackPanel>
+</Page>
