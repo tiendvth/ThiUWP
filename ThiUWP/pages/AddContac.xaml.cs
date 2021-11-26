@@ -28,19 +28,37 @@ namespace ThiUWP.pages
         public AddContac()
         {
             this.InitializeComponent();
+            this.Loaded += AddContac_Loaded;
+        }
+
+        private void AddContac_Loaded(object sender, RoutedEventArgs e)
+        {
+            DatabaseMigration.UpdateDatabase();
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             var note = new Note()
             {
-               
-                Name = txtname.Text,
                 PhoneNumber = txtphonnumber.Text,
+                Name = txtname.Text
             };
-
-            noteModel.Save(note);
-
+            var resutl = noteModel.Save(note);
+            ContentDialog contentDialog = new ContentDialog();
+            if (resutl)
+            {
+                contentDialog.Title = "Actions success";
+                contentDialog.Content = "Contact Saved!";
+                contentDialog.PrimaryButtonText = "Ok";
+                await contentDialog.ShowAsync();
+            }
+            else
+            {
+                contentDialog.Title = "Actions fails";
+                contentDialog.Content = "Please try again!";
+                contentDialog.PrimaryButtonText = "Ok";
+                await contentDialog.ShowAsync();
+            }
         }
     }
 }

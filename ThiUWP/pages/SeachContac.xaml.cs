@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using ThiUWP.models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +23,16 @@ namespace ThiUWP.pages
     /// </summary>
     public sealed partial class SeachContac : Page
     {
+        private NoteModel noteModel = new NoteModel();
         public SeachContac()
         {
             this.InitializeComponent();
+            this.Loaded += SeachContac_Loaded;
+        }
+
+        private void SeachContac_Loaded(object sender, RoutedEventArgs e)
+        {
+            MyListView.ItemsSource = noteModel.FindAll();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

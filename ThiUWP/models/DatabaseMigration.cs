@@ -12,26 +12,23 @@ namespace ThiUWP.models
 {
    public class DatabaseMigration
     {
-        private static string _databaseFile = "mynote.db";
+        private static string _databaseFile = "mycontact.db";
         public static string _databasePath;
-        private static string _createNoteTable = "CREATE TABLE IF NOT EXISTS notes Contacts " +
+        private static string _createContactTable = "CREATE TABLE IF NOT EXISTS contacts " +
             "(PhoneNumber NVARCHAR(100) PRIMARY KEY," +
-            "Name NVARCHAR(255) NOT NULL,";
-            
-            
+            "Name NVARCHAR(255) NOT NULL)";           
         public async static void UpdateDatabase()
         {
             //Tạo đường dẫn.
             await ApplicationData.Current.LocalFolder.CreateFileAsync(_databaseFile, CreationCollisionOption.OpenIfExists);
             _databasePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, _databaseFile);
-            using (SqliteConnection db = new SqliteConnection($"Filename = {_databasePath}"))
+            using (SqliteConnection cnn = new SqliteConnection($"Filename = {_databasePath}"))
             {
-                db.Open();
-                SqliteCommand command = new SqliteCommand(_createNoteTable,db );
-                Debug.WriteLine("ok");
+                cnn.Open();
+                SqliteCommand command = new SqliteCommand(_createContactTable, cnn);                
                 command.ExecuteNonQuery();
+                
             }
-        }
-       
+        }       
     }
 }

@@ -60,3 +60,8 @@ C:\Users\LE DIEP\source\repos\ThiUWP\ThiUWP\obj\x64\Debug\qualifiers.txt.interme
 C:\Users\LE DIEP\source\repos\ThiUWP\ThiUWP\obj\x64\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\LE DIEP\source\repos\ThiUWP\ThiUWP\obj\x64\Debug\ProjectArchitectures.txt
 C:\Users\LE DIEP\source\repos\ThiUWP\ThiUWP\obj\x64\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_637424563200000000.json
+C:\Users\LE DIEP\source\repos\ThiUWP\ThiUWP\obj\x64\Debug\pages\Navigation.g.i.cs
+C:\Users\LE DIEP\source\repos\ThiUWP\ThiUWP\obj\x64\Debug\pages\Navigation.g.cs
+C:\Users\LE DIEP\source\repos\ThiUWP\ThiUWP\obj\x64\Debug\pages\Navigation.xaml
+C:\Users\LE DIEP\source\repos\ThiUWP\ThiUWP\obj\x64\Debug\pages\Navigation.xbf
+C:\Users\LE DIEP\source\repos\ThiUWP\ThiUWP\bin\x64\Debug\pages\Navigation.xbf

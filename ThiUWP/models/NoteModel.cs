@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThiUWP.entities;
+using Windows.UI.Xaml.Controls;
 
 namespace ThiUWP.models
 {
     public class NoteModel
     {
+        private static string _selectStatementWithConditionTemplate = "SELECT * FROM contacts WHERE Name like @keyword";
         public NoteModel()
         {
             DatabaseMigration.UpdateDatabase();
@@ -19,13 +21,13 @@ namespace ThiUWP.models
         {
             try
             {
-                using (SqliteConnection db = new SqliteConnection($"Filename={DatabaseMigration._databasePath}"))
+                using (SqliteConnection cnn = new SqliteConnection($"Filename={DatabaseMigration._databasePath}"))
                 {
-                    db.Open();
-                    SqliteCommand command = new SqliteCommand("INSERT INTO notes(Id, Name, PhoneNumber)" +
-                " values ( @name, @phonnumber)", db);
-                    command.Parameters.AddWithValue("@Name", note.Name);
-                    command.Parameters.AddWithValue("@PhoneNumber", note.PhoneNumber);                    
+                    cnn.Open();
+                    SqliteCommand command = new SqliteCommand("INSERT INTO contacts (PhoneNumber, Name)" +
+                " values (@phoneNumber, @name)", cnn);
+                    command.Parameters.AddWithValue("@phoneNumber", note.PhoneNumber);
+                    command.Parameters.AddWithValue("@name", note.Name);
                     command.ExecuteNonQuery();
                     return true;
                 }
@@ -35,6 +37,9 @@ namespace ThiUWP.models
                 return false;
             }
         }
+
+
+
         public List<Note> FindAll()
         {
             List<Note> result = new List<Note>();
@@ -43,21 +48,18 @@ namespace ThiUWP.models
                 using (SqliteConnection cnn = new SqliteConnection($"Filename={DatabaseMigration._databasePath}"))
                 {
                     cnn.Open();
-                    SqliteCommand command = new SqliteCommand("SELECT * FROM notes", cnn);
+                    SqliteCommand command = new SqliteCommand("SELECT * FROM contacts", cnn);
                     var reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        var id = reader.GetString(0);
+                        var phoneNumber = reader.GetString(0);
                         var name = reader.GetString(1);
-                        var phonenumber = reader.GetString(2);                        
-                        var note = new Note()
+                        var contact = new Note()
                         {
-                           
-                            Name = name,
-                            PhoneNumber = phonenumber,
-                           
+                            PhoneNumber = phoneNumber,
+                            Name = name
                         };
-                        result.Add(note);
+                        result.Add(contact);
                     }
                 }
             }
@@ -67,6 +69,48 @@ namespace ThiUWP.models
                 Console.WriteLine(e.Message);
             }
             return result;
+        }
+
+
+        public async Task<List<Note>> SearchByKeyword(string keyword)
+        {
+            List<Note> contacts = new List<Note>();
+            try
+            {
+                //
+                using (SqliteConnection cnn = new SqliteConnection($"Filename={DatabaseMigration._databasePath}"))
+                {
+                    cnn.Open();
+                    //Tạo câu lệnh
+                    SqliteCommand cmd = new SqliteCommand(_selectStatementWithConditionTemplate, cnn);
+                    cmd.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
+                    //Bắn lệnh vào và lấy dữ liệu.
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var phoneNumber = Convert.ToString(reader["PhoneNumber"]);
+                        var name = Convert.ToString(reader["Name"]);
+                        var contact = new Note()
+                        {
+                            PhoneNumber = phoneNumber,
+                            Name = name
+                        };
+                        contacts.Add(contact);
+                    }
+                    if (reader == null)
+                    {
+                        ContentDialog contentDialog = new ContentDialog();
+                        contentDialog.Title = "Khong tim thay";
+                        contentDialog.PrimaryButtonText = "Khong tim thay";
+                        await contentDialog.ShowAsync();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return contacts;
         }
     }
 }

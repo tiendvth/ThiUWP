@@ -94,6 +94,9 @@
     <AppxPackagedFile Include="C:\Users\LE DIEP\source\repos\ThiUWP\ThiUWP\bin\x64\Debug\pages\AddContac.xbf">
       <PackagePath>pages\AddContac.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\LE DIEP\source\repos\ThiUWP\ThiUWP\bin\x64\Debug\pages\Navigation.xbf">
+      <PackagePath>pages\Navigation.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\LE DIEP\source\repos\ThiUWP\ThiUWP\bin\x64\Debug\pages\SeachContac.xbf">
       <PackagePath>pages\SeachContac.xbf</PackagePath>
     </AppxPackagedFile>
